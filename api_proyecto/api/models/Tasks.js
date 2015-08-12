@@ -22,9 +22,9 @@ module.exports = {
   		type: 'string'
   	},
   	owner:{
+      required: true,
   		model: 'Users'
   	}
 
   }
 };
-

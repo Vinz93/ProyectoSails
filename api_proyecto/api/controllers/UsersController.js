@@ -27,24 +27,40 @@ module.exports = {
 			if(!id){
 				res.badRequest('hace falta el parametro " id " ');
 			}
-			Users.findOne(id, function(err, user){
-				if (user === undefined) return res.notFound();
-				if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
+		Users.findOne(id)
+		.populate('tasks')
+		.exec(function(err, user) {
+			if (user === undefined) return res.notFound();
+			if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
+			res.status(201);
+			res.json(user);
+		});
+		/*
+		Users.findOne(id, function(err, user){
+			if (user === undefined) return res.notFound();
+			if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
 
-				res.status(201);
-				res.json(user);
-
-			}).populate('tasks');
-
-
-		},
-		index : function(req,res){
-			console.log('function : index');
-			Users.find(function(err, users){
-			if (err) return res.badRequest('ha ocurrido en la busqueda de los usuarios');
-			return res.json(users);
+			res.status(201);
+			res.json(user);
 
 		});
+	*/
+		},
+
+		index : function(req,res){
+				/*
+					console.log('function : index');
+					Users.find(function(err, users){
+					if (err) return res.badRequest('ha ocurrido en la busqueda de los usuarios');
+					return res.json(users);
+				});
+			*/
+			Users.find()
+			.populate('tasks')
+			.exec(function(err, users) {
+				if (err) return res.badRequest('ha ocurrido un error en la busqueda de los usuarios');
+				return res.json(users);
+			});
 
 		},
 
@@ -58,7 +74,7 @@ module.exports = {
 			Users.update(id,params, function(err, user){
 				if (user.length === 0) return res.notFound();
 				if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
-				res.json(user);	
+				res.json(user);
 			});
 
 		},
@@ -76,11 +92,6 @@ module.exports = {
                 if (err) res.serverError(err);
                 return res.json(result);
             });
-
         });
-
 		}
-
-	
 };
-
