@@ -1,19 +1,26 @@
 # ProyectoSails
 
-Api restful  TODO list
+**Api restful  TODO list**
 
-model:
+`npm install sails -g`
+`sails lift`
+
+**model**
 
 users
 tasks
 
-relationship:
+**relationship:**
 
 user 1 ------ * tasks  
 
-Ejemplos
+**Ejemplos**
 
-1.- json response to task  -- get localhost:1337/tasks/:id --
-2.- respuesta en json para -- get localhost:1337/users/:id --
+**1)** json response to task  
+`get localhost:1337/tasks/:id`
+
+**2)** json response to user
+
+`get localhost:1337/users/:id`
 
 http://pastie.org/10347312
