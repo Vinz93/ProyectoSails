@@ -56,7 +56,7 @@ module.exports = {
 			Tasks.update(id,params, function(err, task){
 				if (task.length === 0) return res.notFound();
 				if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
-				res.json(task);	
+				res.json(task);
 			});
 
 		},
@@ -79,6 +79,5 @@ module.exports = {
 
 		}
 
-	
-};
 
+};

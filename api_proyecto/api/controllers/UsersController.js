@@ -12,7 +12,7 @@ module.exports = {
 		var params = req.params.all();
 		Users.create(params, function(err, user){
 			if(err){
-				res.badRequest('faltan parametros o son erroneos');
+					return res.badRequest('faltan parametros o son erroneos');
 				//res.view('404');
 			}
 			res.status(201);
@@ -22,10 +22,11 @@ module.exports = {
 		},
 
 		show: function(req, res){
+			//if(req.cookies.login == false) return res.badRequest('no te encuentras logeado');
 			console.log('function : show');
 			var id = req.param('id');
 			if(!id){
-				res.badRequest('hace falta el parametro " id " ');
+				return res.badRequest('hace falta el parametro " id " ');
 			}
 		Users.findOne(id)
 		.populate('tasks')
@@ -65,6 +66,7 @@ module.exports = {
 		},
 
 		update: function(req,res){
+			//if(req.cookies.login == false) return res.badRequest('no te encuentras logeado');
 			console.log('function : update');
 			var id = req.param('id');
 			if(!id){
