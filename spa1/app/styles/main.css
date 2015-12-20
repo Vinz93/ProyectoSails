@@ -1,0 +1,130 @@
+
+
+/* ==========================================================================
+           Header
+   ========================================================================== */
+header{
+  height: 100px;
+  width: 100%;
+  background: #f2c530; /* Old browsers */
+  background: -moz-linear-gradient(left, #f2c530 0%, #fc4141 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f2c530), color-stop(100%,#fc4141)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #f2c530 0%,#fc4141 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #f2c530 0%,#fc4141 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #f2c530 0%,#fc4141 100%); /* IE10+ */
+  background: linear-gradient(to right, #f2c530 0%,#fc4141 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2c530', endColorstr='#fc4141',GradientType=1 ); /* IE6-9 */
+  position: relative;
+
+}
+
+header > .container-fluid{
+	height: 100px;
+	margin: 0 50px 0 140px;
+	padding: 0;
+}
+header > figure > img {
+	position: absolute;
+	height: 100px;
+	width: auto;
+	    top: 0;
+    left: 29px;
+}
+
+header h1{
+  font-size: 48px;
+  color: white;
+}
+
+
+/* ==========================================================================
+       Content
+   ========================================================================== */
+
+section, section > .container-fluid , main{
+width: 100%;
+height: 600px;
+}
+
+section{
+  /*background-color: #FFF1A2;*/
+    margin-top: 60px;
+}
+section > .container-fluid {
+/*padding: 60px 80px 0 80px;*/
+  padding: 0 80px;
+
+}
+main {
+   background-color: #eee; 
+}
+
+section .row {
+  margin:0; 
+}
+
+blockquote {
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+ul{
+  padding: 0;
+  list-style: none;
+}
+.task-container li{
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.task-container li , .task-container blockquote {
+  height: 110px;
+  width: 100%;
+}
+.task-container blockquote{
+  padding: 0;
+  background-color: #eee;
+  border-right: 4px solid;
+  border-color: black; 
+}
+
+blockquote > span {
+  display: block;
+  height: 40px;
+  width: 100%;
+}
+
+blockquote > img{
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+
+blockquote > h3{
+  padding-top: 20px;
+  margin-top: 0;
+}
+
+   /* ==========================================================================
+      Fonts
+      ========================================================================== */
+
+@font-face {
+    font-family: adventure-font;
+    src: url(../fonts/Adventure.otf);
+}
+
+.adventure-font{
+  font-family: adventure-font;
+}
+
+
+@font-face {
+    font-family: DK_Petit_Four-font;
+    src: url(../fonts/DK_Petit_Four.otf);
+}
+
+.DK_Petit_Four-font{
+  font-family: DK_Petit_Four-font;
+}
