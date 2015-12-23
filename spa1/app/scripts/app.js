@@ -1,21 +1,8 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name spa1App
- * @description
- * # spa1App
- *
- * Main module of the application.
- */
-angular
-  .module('spa1App', [
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize'
-  ])
-  .config(function ($routeProvider) {
+var app = angular.module('spa1App', ['ngCookies','ngResource','ngRoute','ngSanitize']);
+ 
+  app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -26,6 +13,11 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
       })
       .otherwise({
         redirectTo: '/'
