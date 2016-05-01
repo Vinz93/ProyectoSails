@@ -47,7 +47,9 @@ module.exports.routes = {
   'get /tasks/:id' : 'TasksController.show',
   'get /tasks' : 'TasksController.index',
   'put /tasks/:id?' : 'TasksController.update',
-  'delete /tasks/:id?' : 'TasksController.destroy'
+  'delete /tasks/:id?' : 'TasksController.destroy',
+
+  'post /login' : 'AuthController.login'
 
   /***************************************************************************
   *                                                                          *

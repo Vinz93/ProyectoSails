@@ -1,32 +1,45 @@
-/**
- * AuthController
- *
- * @description :: Server-side logic for managing auths
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
- */
-
 module.exports = {
 
 	login: function(req, res){
+		//se toman los parametros del request
 		var email = req.param('email');
-		if(!email){
+		var password = req.param('password');
+		// se verifica que los parametros se encuentre llenos
+		if(!email || !password){
 			res.badRequest('hace falta el parametro " email " ');
+			console.log('AuthController : Faltan paramentros');
 		}
-		Users.findOne(email, function(err,user){
-			if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
-			if (user === undefined){
-				res.cookies.login = false;
-				res.cookies.id = null;
-				return res.notFound();
-			}
-			res.status(201);
-			res.cookies.login = true;
-			res.cookies.id = user.id;
-			res.json(user);
-			console.log(res.cookies);
+
+		// se realiza la busqueda en usuarios por el 'email'
+		Users.findOne({email: email}).exec(function (err, data){
+			  if (err) {
+					res.status(500);
+			    return res.negotiate(err);
+			  }
+			  if (!data) {
+					res.status(401);
+			    return res.notFound('Could not find the user, sorry.');
+			  }
+				// Si existe el email se verifica el password para hacer el login
+				if (data.password == password){
+					sails.log('Succesful login for : "%s"', data.name);
+					res.status(200);
+					// res.cookies.login = true;
+					//res.cookies.id = data.id;
+					req.session.authenticated = true;
+					return res.json(data);
+				}else {
+					sails.log('Invalid password');
+					res.status(401);
+					return res.notFound('Invalid password, sorry.');
+				}
+
 		});
+
+
 	},
 	logout: function(req,res){
+		req.session.authenticated = false;
 		res.cookies.login = false;
 		res.cokkies.id = null;
 		console.log(res.cookies);

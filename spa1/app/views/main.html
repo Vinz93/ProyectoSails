@@ -2,49 +2,61 @@
   <div class="container-fluid">
     <article class="row">
       <div class="col-xs-6">
-        <main>
+        <main class="task-detail-container" ng-show= "detailTask ">
           <img src="images/flat-pc2.png">
-          <h3 class=" text-center">Cocinar</h3>  
-          <span class=" text-center"><em>8:00</em> AM</span>
-          <span><p>Full descripcion en este lugar de la pagina</p></span>
-          <span>tipo de actividad : Utilidades</span>
-          <span> prioridad </span>    
+          <span class="task-item task-detail-item"><strong>Tipo : </strong>{{ detailTask.type_task }}</span>
+          <span class="task-item task-detail-item"><strong>Prioridad : </strong>{{ detailTask.priority }}</span>
+          <span class="task-item task-detail-item"><strong>Descripcion: </strong>{{ detailTask.description }}</span>
+          <span class="task-item task-detail-item" ng-show="detailTask.finish_date"><strong>Fin : </strong>{{ detailTask.finish_date }}</span>
         </main>
+
+        <i class="fa fa-plus" aria-hidden="true" ng-click= "setVisibility()"></i>
+        <span class="add-task-text">Añadir nueva tarea</span>
+        <form class="add-task-form" ng-submit="createTask()" ng-show="formVisibility">
+          <span class="input input--yoshiko">
+            <input class="input__field input__field--yoshiko" type="text" id="input-1" ng-model="newTask.type_task" required/>
+            <label class="input__label input__label--yoshiko " for="input-1">
+              <span class="input__label-content input__label-content--yoshiko" data-content="Tipo">Tipo</span>
+            </label>
+          </span>
+          <span class="input input--yoshiko">
+            <input class="input__field input__field--yoshiko" type="number" id="input-1" ng-model="newTask.priority" required/>
+            <label class="input__label input__label--yoshiko " for="input-1">
+              <span class="input__label-content input__label-content--yoshiko" data-content="Prioridad">Prioridad</span>
+            </label>
+          </span>
+          <span class="input input--yoshiko">
+            <input class="input__field input__field--yoshiko" type="text" id="input-1" ng-model="newTask.description" required/>
+            <label class="input__label input__label--yoshiko " for="input-1">
+              <span class="input__label-content input__label-content--yoshiko" data-content="Descripcion">Descripcion</span>
+            </label>
+          </span>
+          <span class="input input--yoshiko">
+            <input class="input__field input__field--yoshiko" type="date" id="input-1" ng-model="newTask.finish_date" required/>
+            <label class="input__label input__label--yoshiko " for="input-1">
+              <span class="input__label-content input__label-content--yoshiko" data-content="Email">Email</span>
+            </label>
+          </span>
+          <span class="input">
+            <input type="submit" value="Agregar" class="btn-submit">
+          </span>
+        </form>
+
       </div>
-      <!-- Task container -->
-      <div class="col-xs-6 task-container">
-        <ul>
-          <li>
-            <blockquote>
-              <img src="images/flat-pc2.png">
-              <h3 class=" text-center">Cocinar</h3>  
-              <span class=" text-center"><em>8:00</em> AM</span>                                   
-            </blockquote>
-          </li>   
-          <li>
-            <blockquote>
-              <img src="images/flat-pc2.png">
-              <h3 class=" text-center">Estudiar Angular</h3>
-              <span class=" text-center"><em>8:00</em> AM</span>
-            </blockquote>
-          </li>  
-          <li>
-            <blockquote>
-              <img src="images/flat-pc2.png">
-              <h3 class=" text-center">Aprender sobre Node.js</h3>
-              <span class=" text-center"><em>8:00</em> PM</span>
-            </blockquote>
-          </li>  
-          <li>
-            <blockquote>
-              <img src="images/flat-pc2.png">
-              <h3 class=" text-center">Practicar cosas utiles</h3>
-              <span class=" text-center"><em>8:00</em> PM </span>
-            </blockquote>
-          </li>  
+      <div class="col-xs-6">
+          <ul class="task-list">
+            <li  ng-repeat = " task in user.tasks"> <!--  | orderBy:'-priority':reverse = true  -->
+              <blockquote class="task-container" ng-click="showDetail($index)">
+                <!-- <img src="images/flat-pc2.png"> -->
+                <span class="task-item"><strong>Tipo : </strong>{{ task.type_task }}</span>
+                <span class="task-item"><strong>Prioridad : </strong>{{ task.priority }}</span>
+                <span class="task-item"><strong>Descripcion: </strong>{{ task.description }}</span>
+                <span class="task-item" ng-show="task.finish_date"><strong>Fin : </strong>{{ task.finish_date }}</span>
+                <i class="fa fa-trash delete-task" aria-hidden="true" ng-click="deleteTask($index)"></i>
+              </blockquote>
+            </li>
         </ul>
       </div>
-
-    </article>   
+    </article>
   </div>
 </section>

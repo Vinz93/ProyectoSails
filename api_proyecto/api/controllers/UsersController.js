@@ -1,9 +1,3 @@
-/**
- * UsersController
- *
- * @description :: Server-side logic for managing users
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
- */
 
 module.exports = {
 
@@ -60,7 +54,7 @@ module.exports = {
 			.populate('tasks')
 			.exec(function(err, users) {
 				if (err) return res.badRequest('ha ocurrido un error en la busqueda de los usuarios');
-				return res.json(users);
+				return res.jsonp(users);
 			});
 
 		},
@@ -70,11 +64,12 @@ module.exports = {
 			console.log('function : update');
 			var id = req.param('id');
 			if(!id){
-				res.badRequest('hace falta el parametro " id " ');
+				res.badRequest('hace falta el parametro  id  ');
 			}
 			var params = req.params.all();
 			Users.update(id,params, function(err, user){
-				if (user.length === 0) return res.notFound();
+				// if (user.length === 0) return res.notFound();
+				if(!user) return res.notFound();
 				if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
 				res.json(user);
 			});

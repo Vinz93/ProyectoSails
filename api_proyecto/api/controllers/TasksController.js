@@ -1,10 +1,3 @@
-/**
- * TasksController
- *
- * @description :: Server-side logic for managing Tasks
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
- */
-
 module.exports = {
 
 		create: function(req,res){
@@ -29,7 +22,7 @@ module.exports = {
 			Tasks.findOne(id, function(err, task){
 				if (task === undefined) return res.notFound();
 				if (err) return res.badRequest('ha ocurrido en la busqueda del usuario');
-				res.status(201);
+				res.status(200);
 				res.json(task);
 
 			});
@@ -39,7 +32,7 @@ module.exports = {
 		index : function(req,res){
 			console.log('function : index');
 			Tasks.find(function(err, tasks){
-			if (err) return res.badRequest('ha ocurrido en la busqueda de los usuarios');
+			if (err) return res.badRequest('ha ocurrido en la busqueda de las tareas');
 			return res.json(tasks);
 
 		});
@@ -76,7 +69,6 @@ module.exports = {
             });
 
         });
-
 		}
 
 
