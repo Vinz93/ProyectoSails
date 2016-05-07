@@ -1,6 +1,6 @@
 var app = angular.module('spa1App.services',['ngStorage']);
   app.service('user', function($localStorage){
-    this.data = { id : '' , email : ''};
+    this.data = { id : '' , email : '' , name : '' };
 
     this.setData = function(id , email , name){
       this.data.id = id;
@@ -17,6 +17,14 @@ var app = angular.module('spa1App.services',['ngStorage']);
     this.clearData = function () {
       $localStorage.$reset();
       return true;
+    }
+
+    this.isLoged = function () {
+      if($localStorage.data){
+        return true;
+      } else {
+        return false;
+      }
     }
 
   });

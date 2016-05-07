@@ -22,6 +22,7 @@
   }
   // Funcion para crear nuevas tareas
   $scope.createTask = function(){
+    console.log('include : ', $scope.newTask);
     var dataContent = { owner : user.getData().id , description : $scope.newTask.description , priority : $scope.newTask.priority , type_task : $scope.newTask.type_task , finish_date : $scope.newTask.finish_date };
     console.log('taskContent : ',dataContent);
     $http({

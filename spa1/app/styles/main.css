@@ -428,7 +428,7 @@ blockquote > h3{
       ===============================================*/
 
       .task-detail-container{
-        height: 318px;
+        min-height: 318px;
         background-color: white;
         padding: 20px;
         width: 100%;

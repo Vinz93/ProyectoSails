@@ -13,6 +13,7 @@
         <i class="fa fa-plus" aria-hidden="true" ng-click= "setVisibility()"></i>
         <span class="add-task-text">Añadir nueva tarea</span>
         <form class="add-task-form" ng-submit="createTask()" ng-show="formVisibility">
+          <!-- <div ng-include="'../views/_task_form.html'"></div> -->
           <span class="input input--yoshiko">
             <input class="input__field input__field--yoshiko" type="text" id="input-1" ng-model="newTask.type_task" required/>
             <label class="input__label input__label--yoshiko " for="input-1">

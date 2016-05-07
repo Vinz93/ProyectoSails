@@ -7,7 +7,10 @@ var app = angular.module('spa1App', ['ngCookies','ngResource','ngRoute','ngSanit
       .when('/', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        resolve: {
+           skiplogin :  _skiplogin
+        }
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -17,7 +20,10 @@ var app = angular.module('spa1App', ['ngCookies','ngResource','ngRoute','ngSanit
       .when('/main', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        resolve: {
+          noAuthorized : _noAuthorized
+        }
       })
       .otherwise({
         redirectTo: '/'
@@ -28,7 +34,6 @@ var app = angular.module('spa1App', ['ngCookies','ngResource','ngRoute','ngSanit
   app.controller('appController',function ($scope, user , $location , $rootScope, $http) {
 
     $rootScope.user = user.getData();
-
     //Logout Function
     $scope.logOut = function () {
       user.clearData();
@@ -72,6 +77,7 @@ var app = angular.module('spa1App', ['ngCookies','ngResource','ngRoute','ngSanit
       }
     }
 
+// Settings Visibility function
     $scope.settingsVisibility = false;
     $scope.setSettingsVisibility = function () {
       if($scope.settingsVisibility){
@@ -80,7 +86,33 @@ var app = angular.module('spa1App', ['ngCookies','ngResource','ngRoute','ngSanit
         $scope.settingsVisibility = true;
       }
     }
-
-
-
   });
+// End Main controller
+
+// My Functions
+  function _skiplogin($q , $location, user, $timeout) {
+    var defer = $q.defer();
+    if(user.isLoged()){
+      $timeout(function (){
+          $location.path('/main');
+      },10);
+      defer.reject();
+    }else{
+      defer.resolve();
+    }
+    return defer.promise;
+  }
+
+
+  function _noAuthorized($q , $location, user, $timeout) {
+    var defer = $q.defer();
+    if(!user.isLoged()){
+      $timeout(function (){
+          $location.path('/login');
+      },10);
+      defer.reject();
+    }else{
+      defer.resolve();
+    }
+    return defer.promise;
+  }
